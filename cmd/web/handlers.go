@@ -170,6 +170,7 @@ func (app *application) userLogin(w http.ResponseWriter, r *http.Request) {
 	data.Form = userLoginForm{}
 	app.render(w, http.StatusOK, "login.tmpl", data)
 }
+
 func (app *application) userLoginPost(w http.ResponseWriter, r *http.Request) {
 	// Decode the form data into the userLoginForm struct.
 	var form userLoginForm
@@ -236,4 +237,8 @@ func (app *application) userLogoutPost(w http.ResponseWriter, r *http.Request) {
 	app.sessionManager.Put(r.Context(), "flash", "You've been logged out successfully!")
 	// Redirect the user to the application home page.
 	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+
+func ping(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("OK"))
 }
